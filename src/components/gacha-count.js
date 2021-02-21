@@ -4,18 +4,38 @@ class GachaCount extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: 0
+            count: 1
         };
     }
 
-    handleClick = () => {
+    getCount = () => {
+        return this.state.count
+    }
+
+    plusCount = () => {
         this.setState(state => {
-            return { count: state.count + 1 }
+            if (state.count < 10) {
+                return { count: state.count + 1 }
+            }
+        });
+    };
+
+    minusCount = () => {
+        this.setState(state => {
+            if (state.count > 1) {
+                return { count: state.count - 1 }
+            }
         });
     };
 
     render() {
-        return <button onClick={this.handleClick}>ガチャ回数：{this.state.count}</button>;
+        return (
+            <div>
+                <>回数: {this.state.count} </>
+                <button onClick={this.plusCount}>＋</button>
+                <button onClick={this.minusCount}>－</button>
+            </div>
+        )
     }
 }
 
