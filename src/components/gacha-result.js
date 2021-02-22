@@ -3,8 +3,8 @@ import axios from "axios";
 
 import GachaCount from "./gacha-count"
 
-const CharacterName = props => {
-    return <p style={{ backgroundColor: "#CCC" }} key={props.characterID} > {props.children}</p >;
+const Character = props => {
+    return <p style={{ fontWeight: "bold"}}> {props.children}</p >;
 };
 
 class GachaResult extends React.Component {
@@ -13,7 +13,7 @@ class GachaResult extends React.Component {
         this.state = {
             count: 1,
             token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJfX2luaXRfXyIsIm5hbWUiOiJUYXJvIn0.7h1afKZsOWUqefzzi3rtA64P48f-wvIyJP-85cPVd0s",
-            gachaResults: []
+            results: []
         };
     }
 
@@ -31,7 +31,7 @@ class GachaResult extends React.Component {
             }),
         }
         )
-            .then(res => this.setState({ gachaResults: res.data.results }))
+            .then(res => this.setState({ results: res.data.results }))
             .catch(err => alert(err));
     };
 
@@ -53,17 +53,16 @@ class GachaResult extends React.Component {
 
     render() {
         return (
-            <>
+            <div style={{ backgroundColor: "#CFF", padding: "40px", textAlign: "center", margin: "20px 100px" }}>
+                <button onClick={this.drawGacha}>ガチャを引く [ {this.state.count} 回 ] </button>
                 <GachaCount
-                    count={this.state.count}
                     plusCount={() => this.plusCount()}
                     minusCount={() => this.minusCount()}
                 />
-                <button onClick={this.drawGacha}>ガチャを引く</button>
-                {this.state.gachaResults.map((result, i) => (
-                    <CharacterName key={i}>キャラクターID: {result.characterID}&emsp;NAME: {result.name}</CharacterName>
+                {this.state.results.map((result, i) => (
+                    <Character key={i}>キャラクターID: {result.characterID}&emsp;NAME: {result.name}</Character>
                 ))}
-            </>
+            </div>
         );
     }
 }

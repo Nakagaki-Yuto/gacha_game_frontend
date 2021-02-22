@@ -4,11 +4,11 @@ class GachaCount extends React.Component {
 
     render() {
         return (
-            <p>
-                <>回数: {this.props.count} </>
+            <div>
                 <button onClick={() => this.props.plusCount()}>＋</button>
                 <button onClick={() => this.props.minusCount()}>－</button>
-            </p>
+                <> </>
+            </div>
         )
     }
 }
